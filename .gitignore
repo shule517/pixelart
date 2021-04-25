@@ -71,3 +71,4 @@ modules.xml
 pixelart.iml
 vcs.xml
 /.idea/*
+vendor/*
