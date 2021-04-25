@@ -70,4 +70,4 @@ misc.xml
 modules.xml
 pixelart.iml
 vcs.xml
-.idea/.gitignore
+/.idea/*
