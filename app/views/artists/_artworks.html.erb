@@ -1,0 +1,24 @@
+<% media = artwork.media.first %>
+<% artist = artwork.user %>
+<div style="padding-bottom: 60px">
+  <div>
+    <a href="<%= "/#{artist.screen_name}" %>">
+      <img src="<%= artist.profile_image_url %>">
+      <%= artist.screen_name %>
+    </a>
+  </div>
+  <div>
+    <a href="<%= artwork.url %>">
+      <% if media.type == 'photo' %>
+        <img src="<%= media.media_url %>" style="width: 40%" />
+      <% elsif media.type == 'animated_gif' || media.type == 'video' %>
+        <video src="<%= artwork.media.first.video_info.variants.first[:url] %>" autoplay loop style="width: 40%" />
+      <% else %>
+        <% raise %>
+      <% end %>
+    </a>
+  </div>
+  <div>
+    <%= artwork.text %>
+  </div>
+</div>

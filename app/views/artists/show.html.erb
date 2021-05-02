@@ -1,1 +1,12 @@
 Artists
+<center style="background: lightcyan">
+  <% @artworks.each do |artwork| %>
+    <%= render partial: 'artworks', locals: { artwork: artwork } %>
+  <% end %>
+
+  <hr>
+
+  <% @like_artworks.each do |artwork| %>
+    <%= render partial: 'artworks', locals: { artwork: artwork } %>
+  <% end %>
+</center>
