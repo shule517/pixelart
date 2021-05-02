@@ -1,7 +1,7 @@
 class TwitterUserTweet
   def initialize(screen_name)
     @screen_name = screen_name
-    @client = TwitterClient.shule.client
+    @client = TwitterClient.pixel.client
   end
 
   def exec
