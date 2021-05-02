@@ -43,6 +43,11 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem 'annotate', '~> 3.1'
+  gem 'better_errors', '~> 2.9'
+  gem 'dotenv-rails', '~> 2.7'
+  gem 'binding_of_caller', '~> 1.0'
 end
 
 group :test do
@@ -57,7 +62,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'twitter', '~> 7.0'
-gem 'dotenv-rails', '~> 2.7'
-gem 'typhoeus', '~> 1.4'
 gem 'ridgepole', '~> 0.9.4'
-gem 'annotate', '~> 3.1'
+# gem 'typhoeus', '~> 1.4'
