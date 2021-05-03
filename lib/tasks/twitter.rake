@@ -7,6 +7,13 @@ namespace :twitter do
       pixelart_artworks.each do |artwork|
         Artwork.create_from_tweet!(artwork)
       end
+
+      anime_query = "#indie_anime #{query}"
+      puts anime_query
+      pixelart_artworks = TwitterUserTweet.new(nil).pixelart_artworks(anime_query)
+      pixelart_artworks.each do |artwork|
+        Artwork.create_from_tweet!(artwork)
+      end
     end
   end
 end
