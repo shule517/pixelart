@@ -21,7 +21,7 @@
   <div>
     <%= artwork.text.gsub(/http.+/, '').gsub(/#.+/, '') %>
     <% artwork.hashtags.map(&:text).each do |hashtag| %>
-      <a href="<%= "/hashtag/#{hashtag}" %>"><%= "##{hashtag}" %></a>
+      <a href="<%= "/hashtags/#{hashtag}" %>"><%= "##{hashtag}" %></a>
     <% end %>
   </div>
 </div>
