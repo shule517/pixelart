@@ -1,4 +1,4 @@
-create_table :artworks, force: :cascade do |t|
+create_table :artworks, id: :bigint, unsigned: true, force: :cascade do |t|
   t.bigint :artist_id, null: false
   t.datetime :posted_at, null: false
   t.string :text, null: false
@@ -26,17 +26,17 @@ add_index :artworks, :lang
 add_index :artworks, :media_type
 add_index :artworks, :artist_id
 
-create_table :artwork_hashtags, force: :cascade do |t|
+create_table :artwork_hashtags, id: :bigint, unsigned: true, force: :cascade do |t|
   t.bigint :artwork_id, null: false
   t.bigint :hashtag_id, null: false
 end
 
-create_table :hashtags, force: :cascade do |t|
+create_table :hashtags, id: :bigint, unsigned: true,  force: :cascade do |t|
   t.string :name, null: false
 end
 add_index :hashtags, :name, unique: true
 
-create_table :artists, force: :cascade do |t|
+create_table :artists, id: :bigint, unsigned: true,  force: :cascade do |t|
   t.string :name, null: false
   t.string :screen_name, null: false
   t.string :location
