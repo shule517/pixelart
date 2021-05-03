@@ -63,4 +63,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'twitter', '~> 7.0'
 gem 'ridgepole', '~> 0.9.4'
-# gem 'typhoeus', '~> 1.4'
+gem 'bugsnag', '~> 6.20'
