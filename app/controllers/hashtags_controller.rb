@@ -1,6 +1,6 @@
 class HashtagsController < ApplicationController
   def index
-    @hashtags = Hashtag.all.joins(:artworks).group(:hashtag_id).order("count(artwork_id) desc")
+    @hashtags = Hashtag.all.joins(:artworks).group(:id).order("count(artwork_id) desc")
   end
 
   def show
