@@ -42,6 +42,8 @@
 #  index_artists_on_screen_name  (screen_name) UNIQUE
 #
 class Artist < ApplicationRecord
+  has_many :artworks
+
   def self.create_from_user!(twitter_user)
     artist = find_or_initialize_by(id: twitter_user.id)
 
@@ -72,7 +74,7 @@ class Artist < ApplicationRecord
       profile_background_tile: twitter_user.profile_background_tile?,
       profile_image_url: twitter_user.profile_image_url_https,
       # profile_image_url_https: twitter_user.profile_image_url_https,
-      profile_banner_url: twitter_user.profile_banner_url,
+      profile_banner_url: twitter_user&.to_h[:profile_banner_url],
       profile_link_color: twitter_user.profile_link_color,
       profile_sidebar_border_color: twitter_user.profile_sidebar_border_color,
       profile_sidebar_fill_color: twitter_user.profile_sidebar_fill_color,

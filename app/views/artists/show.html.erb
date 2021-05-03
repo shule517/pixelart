@@ -1,7 +1,7 @@
 <div style="max-width: 600px">
-  <img src="<%= @artworks.first&.user&.to_h[:profile_banner_url] %>" style="width: 100%">
+  <img src="<%= @artist.profile_banner_url %>" style="width: 100%">
   <% @artworks.each do |artwork| %>
-    <%= render partial: 'artworks', locals: { artwork: artwork } %>
+    <%= render partial: 'common/artworks', locals: { artwork: artwork } %>
   <% end %>
 
   <hr>
