@@ -48,6 +48,7 @@ class TwitterUserTweet
 
   def pixelart_artworks(query)
     tweets = pixelart_tweets(query)
+      .map { |tweet| tweet.retweeted_tweet? ? tweet.retweeted_tweet : tweet }
       .select { |tweet| tweet.media.present? }
       .select do |tweet|
         tweet.hashtags.map(&:text).any? { |hashtag| %w(pixelart ドット絵 ドットピクト dotpict 10分ドット).include?(hashtag) }
