@@ -1,5 +1,24 @@
 create_table :artworks, force: :cascade do |t|
+  t.datetime :posted_at
+  t.string :text
+  t.boolean :truncated
+  t.string :source
+  t.bigint :in_reply_to_status_id
+  t.bigint :in_reply_to_user_id
+  t.string :in_reply_to_screen_name
+  t.integer :retweet_count
+  t.integer :favorite_count
+  t.boolean :possibly_sensitive
+  t.string :lang
+  t.string :media_url  # http://pbs.twimg.com/media/E0FEvXdVcAAQsB9.png
+  t.string :media_type # photo / animated_gif / video
   t.timestamps
+
+  # 追加しなかった情報
+  # geo
+  # coordinates
+  # place
+  # contributors
 end
 
 

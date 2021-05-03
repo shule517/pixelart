@@ -15,6 +15,19 @@ ActiveRecord::Schema.define(version: 0) do
   create_table "artworks", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "posted_at"
+    t.string "text"
+    t.boolean "truncated"
+    t.string "source"
+    t.integer "in_reply_to_status_id"
+    t.integer "in_reply_to_user_id"
+    t.string "in_reply_to_screen_name"
+    t.integer "retweet_count"
+    t.integer "favorite_count"
+    t.boolean "possibly_sensitive"
+    t.string "lang"
+    t.string "media_url"
+    t.string "media_type"
   end
 
 end
