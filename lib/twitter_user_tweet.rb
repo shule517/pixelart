@@ -38,11 +38,24 @@ class TwitterUserTweet
       .select { |tweet| !tweet.retweeted_tweet? && !tweet.user_mentions? }
       .select { |tweet| tweet.media.present? }
       .select do |tweet|
-      tweet.hashtags.map(&:text).any? { |hashtag| %w(pixelart ドット絵 ドットピクト dotpict 10分ドット).include?(hashtag) }
-    end
+        tweet.hashtags.map(&:text).any? { |hashtag| %w(pixelart ドット絵 ドットピクト dotpict 10分ドット).include?(hashtag) }
+      end
   end
 
   def user_likes
     @client.favorites(@screen_name, count: 200)
+  end
+
+  def pixelart_artworks(query)
+    tweets = pixelart_tweets(query)
+      .select { |tweet| tweet.media.present? }
+      .select do |tweet|
+        tweet.hashtags.map(&:text).any? { |hashtag| %w(pixelart ドット絵 ドットピクト dotpict 10分ドット).include?(hashtag) }
+      end
+    tweets
+  end
+
+  def pixelart_tweets(query)
+    @client.search(query, result_type: :recent).first(100)
   end
 end

@@ -63,7 +63,7 @@ class Artwork < ApplicationRecord
     if media.type == 'photo'
       media.media_url
     elsif media.type == 'animated_gif' || media.type == 'video'
-      media.video_info.variants.first[:url]
+      media.video_info.variants.first.url
     end
   end
 end
