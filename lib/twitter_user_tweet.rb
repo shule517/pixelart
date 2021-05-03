@@ -57,6 +57,6 @@ class TwitterUserTweet
   end
 
   def pixelart_tweets(query)
-    @client.search(query, result_type: :recent).first(100)
+    @client.search(query, result_type: :recent).first(500)
   end
 end
