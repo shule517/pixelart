@@ -3,28 +3,42 @@
 # Table name: artworks
 #
 #  id                      :integer          not null, primary key
-#  favorite_count          :integer
+#  favorite_count          :integer          not null
 #  in_reply_to_screen_name :string
-#  lang                    :string
-#  media_type              :string
-#  media_url               :string
-#  possibly_sensitive      :boolean
-#  posted_at               :datetime
-#  retweet_count           :integer
-#  source                  :string
-#  text                    :string
-#  truncated               :boolean
-#  url                     :string
+#  lang                    :string           not null
+#  media_type              :string           not null
+#  media_url               :string           not null
+#  possibly_sensitive      :boolean          not null
+#  posted_at               :datetime         not null
+#  retweet_count           :integer          not null
+#  source                  :string           not null
+#  text                    :string           not null
+#  truncated               :boolean          not null
+#  url                     :string           not null
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
-#  in_reply_to_status_id   :bigint
-#  in_reply_to_user_id     :integer
+#  artist_id               :integer          not null
+#  in_reply_to_status_id   :integer
+#  in_reply_to_user_id     :bigint
+#
+# Indexes
+#
+#  index_artworks_on_artist_id   (artist_id)
+#  index_artworks_on_lang        (lang)
+#  index_artworks_on_media_type  (media_type)
 #
 class Artwork < ApplicationRecord
+  belongs_to :artist
+
   def self.create_from_tweet!(tweet)
     artwork = find_or_initialize_by(id: tweet.id)
 
+    # TODO: tweet.hashtags.map(&:text)
+
+    artist = Artist.create_from_user!(tweet.user)
+
     artwork.assign_attributes(
+      artist: artist,
       posted_at: tweet.created_at,
       text: tweet.text,
       url: tweet.url,
