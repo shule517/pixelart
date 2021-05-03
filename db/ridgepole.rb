@@ -27,8 +27,8 @@ add_index :artworks, :media_type
 add_index :artworks, :artist_id
 
 create_table :artwork_hashtags, force: :cascade do |t|
-  t.integer :artwork_id, null: false
-  t.integer :hashtag_id, null: false
+  t.bigint :artwork_id, null: false
+  t.bigint :hashtag_id, null: false
 end
 
 create_table :hashtags, force: :cascade do |t|

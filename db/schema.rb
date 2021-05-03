@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 0) do
 
   create_table "artwork_hashtags", force: :cascade do |t|
     t.integer "artwork_id", null: false
-    t.integer "hashtag_id", null: false
+    t.bigint "hashtag_id", null: false
   end
 
   create_table "artworks", force: :cascade do |t|

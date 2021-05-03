@@ -4,7 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  artwork_id :integer          not null
-#  hashtag_id :integer          not null
+#  hashtag_id :bigint           not null
 #
 class ArtworkHashtag < ApplicationRecord
   belongs_to :artwork
