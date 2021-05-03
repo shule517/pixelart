@@ -14,9 +14,10 @@
 #  source                  :string
 #  text                    :string
 #  truncated               :boolean
+#  url                     :string
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
-#  in_reply_to_status_id   :integer
+#  in_reply_to_status_id   :bigint
 #  in_reply_to_user_id     :integer
 #
 class Artwork < ApplicationRecord
@@ -26,6 +27,7 @@ class Artwork < ApplicationRecord
     artwork.assign_attributes(
       posted_at: tweet.created_at,
       text: tweet.text,
+      url: tweet.url,
       truncated: tweet.truncated?,
       source: tweet.source,
       in_reply_to_status_id: tweet.in_reply_to_status_id,

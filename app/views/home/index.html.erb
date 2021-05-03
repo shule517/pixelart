@@ -1,1 +1,5 @@
-Pixel Art
+<div style="background: #0e0c25; color: lightgray;">
+  <% @artworks.each do |artwork| %>
+    <%= render partial: 'artworks', locals: { artwork: artwork } %>
+  <% end %>
+</div>

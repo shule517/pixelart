@@ -1,6 +1,7 @@
 create_table :artworks, force: :cascade do |t|
   t.datetime :posted_at
   t.string :text
+  t.string :url
   t.boolean :truncated
   t.string :source
   t.bigint :in_reply_to_status_id

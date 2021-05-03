@@ -1,0 +1,31 @@
+<%# media = artwork.media.first %>
+<%# artist = artwork.user %>
+<div style="padding-bottom: 60px">
+  <div>
+    <% if false %>
+    <a href="<%= "/#{artist.screen_name}" %>">
+      <img src="<%= artist.profile_image_url %>" style="border-radius: 50%">
+      <%= artist.screen_name %>
+    </a>
+    <% end %>
+  </div>
+  <div>
+    <a href="<%= artwork.url %>">
+      <% if artwork.media_type == 'photo' %>
+        <img src="<%= artwork.media_url %>" style="width: 100%" />
+      <% elsif artwork.media_type == 'animated_gif' || artwork.media_type == 'video' %>
+        <video src="<%= artwork.media_url %>" autoplay loop style="width: 100%" />
+      <% else %>
+        <% raise %>
+      <% end %>
+    </a>
+  </div>
+  <div>
+    <%= artwork.text.gsub(/http.+/, '').gsub(/#.+/, '') %>
+    <% if false %>
+    <% artwork.hashtags.map(&:text).each do |hashtag| %>
+      <a href="<%= "/hashtag/#{hashtag}" %>"><%= "##{hashtag}" %></a>
+    <% end %>
+    <% end %>
+  </div>
+</div>

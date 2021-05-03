@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "text"
     t.boolean "truncated"
     t.string "source"
-    t.integer "in_reply_to_status_id"
+    t.bigint "in_reply_to_status_id"
     t.integer "in_reply_to_user_id"
     t.string "in_reply_to_screen_name"
     t.integer "retweet_count"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "lang"
     t.string "media_url"
     t.string "media_type"
+    t.string "url"
   end
 
 end
