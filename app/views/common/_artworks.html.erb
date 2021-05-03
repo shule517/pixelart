@@ -1,11 +1,12 @@
 <% artist = artwork.artist %>
 <div style="padding-bottom: 60px">
-  <div>
+  <div style="padding: 4px 10px">
     <a href="<%= "/#{artist.screen_name}" %>">
-      <img src="<%= artist.profile_image_url %>" style="border-radius: 50%">
+      <img src="<%= artist.profile_image_url %>" style="border-radius: 50%;height: 32px;">
       <%= artist.name %>
     </a>
   </div>
+
   <div>
     <a href="<%= artwork.url %>">
       <% if artwork.media_type == 'photo' %>
@@ -17,7 +18,8 @@
       <% end %>
     </a>
   </div>
-  <div>
+
+  <div style="padding: 4px 10px">
     <%= artwork.text.gsub(/http.+/, '').gsub(/#.+/, '') %>
     <% artwork.hashtags.map(&:name).each do |hashtag| %>
       <a href="<%= "/hashtags/#{hashtag}" %>"><%= "##{hashtag}" %></a>
