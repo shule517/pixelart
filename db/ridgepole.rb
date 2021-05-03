@@ -26,10 +26,15 @@ add_index :artworks, :lang
 add_index :artworks, :media_type
 add_index :artworks, :artist_id
 
-create_table :hashtags, force: :cascade do |t|
-  t.string :title, null: false
+create_table :artwork_hashtags, force: :cascade do |t|
+  t.integer :artwork_id, null: false
+  t.integer :hashtag_id, null: false
 end
-add_index :hashtags, :title, unique: true
+
+create_table :hashtags, force: :cascade do |t|
+  t.string :name, null: false
+end
+add_index :hashtags, :name, unique: true
 
 create_table :artists, force: :cascade do |t|
   t.string :name, null: false

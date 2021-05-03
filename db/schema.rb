@@ -49,6 +49,11 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["screen_name"], name: "index_artists_on_screen_name", unique: true
   end
 
+  create_table "artwork_hashtags", force: :cascade do |t|
+    t.integer "artwork_id", null: false
+    t.integer "hashtag_id", null: false
+  end
+
   create_table "artworks", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -73,8 +78,8 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table "hashtags", force: :cascade do |t|
-    t.string "title", null: false
-    t.index ["title"], name: "index_hashtags_on_title", unique: true
+    t.string "name", null: false
+    t.index ["name"], name: "index_hashtags_on_name", unique: true
   end
 
 end

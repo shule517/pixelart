@@ -29,11 +29,19 @@
 #
 class Artwork < ApplicationRecord
   belongs_to :artist
+  has_many :artwork_hashtags
+  has_many :hashtags, through: :artwork_hashtags
 
   def self.create_from_tweet!(tweet)
     artwork = find_or_initialize_by(id: tweet.id)
 
-    # TODO: tweet.hashtags.map(&:text)
+    # Hashtagを追加
+    if artwork.hashtags.blank? && tweet.hashtags.present?
+      tweet.hashtags.map(&:text).each do |hashtag|
+        hashtag = Hashtag.find_or_create_by!(name: hashtag)
+        artwork.hashtags << hashtag
+      end
+    end
 
     artist = Artist.create_from_user!(tweet.user)
 
