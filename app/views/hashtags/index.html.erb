@@ -1,0 +1,7 @@
+<div style="max-width: 600px;margin: 20px;">
+  <% @hashtags.each do |hashtag| %>
+    <div>
+      <a href="<%= "/hashtags/#{hashtag.name}" %>"><%= "##{hashtag.name}" %></a> (<%= "#{hashtag.artworks.size}" %>)
+    </div>
+  <% end %>
+</div>
