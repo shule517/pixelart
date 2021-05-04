@@ -1,10 +1,10 @@
 class HashtagsController < ApplicationController
   def index
-    @hashtags = Hashtag.all.joins(:artworks).group(:id).order("count(artwork_id) desc")
+    @hashtags = Hashtag.all.joins(:artworks).group(:id).select("hashtags.name, count(artwork_id) as artwork_count").order("artwork_count desc")
   end
 
   def show
-    @hashtag = Hashtag.find_by(name: params[:id])
-    @artworks = @hashtag.artworks.sort_by { |artwork| artwork.favorite_count }.reverse.first(20)
+    @hashtag = Hashtag.find_by!(name: params[:id])
+    @artworks = @hashtag.artworks.order(favorite_count: :desc).limit(20).preload(:hashtags, :artist)
   end
 end
