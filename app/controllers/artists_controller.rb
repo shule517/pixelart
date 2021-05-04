@@ -13,6 +13,6 @@ class ArtistsController < ApplicationController
     # TODO
 
     @artist = Artist.find_by!(screen_name: params[:screen_name])
-    @artworks = @artist.artworks.order(favorite_count: :desc).first(20)
+    @artworks = @artist.artworks.order(favorite_count: :desc).limit(20).preload(:hashtags, :artist)
   end
 end
