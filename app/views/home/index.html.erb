@@ -1,4 +1,14 @@
 <div style="max-width: 600px">
+  <div style="margin: 25px 4px 4px 4px;">
+    <% if params[:lang] == 'en' %>
+      <a href="/">All</a> | <a href="/ja">にほんご</a> | English
+    <% elsif params[:lang] == 'ja' %>
+      <a href="/">すべて</a> | にほんご | <a href="/en">English</a>
+    <% else %>
+      すべて | <a href="/ja">にほんご</a> | <a href="/en">English</a>
+    <% end %>
+  </div>
+
   <% @artworks.each do |artwork| %>
     <%= render partial: 'common/artworks', locals: { artwork: artwork } %>
   <% end %>
