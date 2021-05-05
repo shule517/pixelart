@@ -43,6 +43,8 @@
 #
 class Artist < ApplicationRecord
   has_many :artworks
+  has_many :favorites
+  has_many :favorite_artworks, through: :favorites, source: :artwork
 
   def self.create_from_user!(twitter_user)
     artist = find_or_initialize_by(id: twitter_user.id)
