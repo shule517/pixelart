@@ -63,6 +63,7 @@ class Artwork < ApplicationRecord
       media_type: tweet.media.first&.type, # photo / animated_gif / video
     )
     artwork.save!
+    artwork
   end
 
   def self.media_url(media)
