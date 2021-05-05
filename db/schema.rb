@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean "profile_use_background_image", null: false
     t.boolean "default_profile", null: false
     t.boolean "default_profile_image", null: false
+    t.bigint "collect_tweet_oldest_id"
     t.index ["lang"], name: "index_artists_on_lang"
     t.index ["screen_name"], name: "index_artists_on_screen_name", unique: true
   end

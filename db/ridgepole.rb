@@ -40,6 +40,9 @@ add_index :hashtags, :name, unique: true
 create_table :artists, id: :bigint, unsigned: true,  force: :cascade do |t|
   t.string :name, null: false
   t.string :screen_name, null: false
+
+  t.bigint :collect_tweet_oldest_id # TODO: null: false
+
   t.string :location
   t.string :description
   t.string :url, null: false

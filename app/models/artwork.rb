@@ -37,7 +37,7 @@ class Artwork < ApplicationRecord
 
     # Hashtagを追加
     if artwork.hashtags.blank? && tweet.hashtags.present?
-      tweet.hashtags.map(&:text).each do |hashtag|
+      tweet.hashtags.map(&:text).uniq.each do |hashtag|
         hashtag = Hashtag.find_or_create_by!(name: hashtag)
         artwork.hashtags << hashtag
       end
