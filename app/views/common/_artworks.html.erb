@@ -1,8 +1,8 @@
 <% artist = artwork.artist %>
 <div style="padding-bottom: 60px">
   <div style="padding: 4px 10px">
-    <a href="<%= "/#{artist.screen_name}" %>">
-      <img src="<%= artist.profile_image_url %>" style="border-radius: 50%;height: 32px;">
+    <a href="<%= "/#{artist.screen_name}" %>" style="text-decoration: none">
+      <img src="<%= artist.profile_image_url %>" style="border-radius: 50%; height: 32px;">
       <div style="display: inline-block; height:32px; margin: auto; color: #639bff;">
         <%= artist.name %>
         <% if defined?(liked_user) && liked_user.present? %>
