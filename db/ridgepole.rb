@@ -30,6 +30,7 @@ create_table :artwork_hashtags, id: :bigint, unsigned: true, force: :cascade do 
   t.bigint :artwork_id, null: false
   t.bigint :hashtag_id, null: false
 end
+add_index :artwork_hashtags, %i(artwork_id hashtag_id), unique: true
 
 create_table :hashtags, id: :bigint, unsigned: true,  force: :cascade do |t|
   t.string :name, null: false
@@ -85,6 +86,11 @@ end
 add_index :artists, :screen_name, unique: true
 add_index :artists, :lang
 
+create_table :favorites, id: :bigint, unsigned: true, force: :cascade do |t|
+  t.bigint :artist_id, null: false
+  t.bigint :artwork_id, null: false
+end
+add_index :favorites, %i(artist_id artwork_id), unique: true
 
 
 

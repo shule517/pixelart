@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 0) do
   create_table "artwork_hashtags", force: :cascade do |t|
     t.integer "artwork_id", null: false
     t.bigint "hashtag_id", null: false
+    t.index ["artwork_id", "hashtag_id"], name: "index_artwork_hashtags_on_artwork_id_and_hashtag_id", unique: true
   end
 
   create_table "artworks", force: :cascade do |t|
@@ -75,6 +76,12 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["artist_id"], name: "index_artworks_on_artist_id"
     t.index ["lang"], name: "index_artworks_on_lang"
     t.index ["media_type"], name: "index_artworks_on_media_type"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "artist_id", null: false
+    t.bigint "artwork_id", null: false
+    t.index ["artist_id", "artwork_id"], name: "index_favorites_on_artist_id_and_artwork_id", unique: true
   end
 
   create_table "hashtags", force: :cascade do |t|
