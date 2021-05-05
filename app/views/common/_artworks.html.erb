@@ -15,10 +15,29 @@
 
   <div>
     <a href="<%= artwork.url %>">
+      <img src="/frame.png" style="width: 100%" />
       <% if artwork.media_type == 'photo' %>
-        <img src="<%= artwork.media_url %>" style="width: 100%" />
+        <img src="<%= artwork.media_url %>" style="
+          position: relative;
+          top: -354px;
+          width: 202px;
+          left: 83px;
+          object-fit: cover;
+          height: 162px;
+          margin-bottom: -140px;
+          border: solid 2px black;
+        " />
       <% elsif artwork.media_type == 'animated_gif' || artwork.media_type == 'video' %>
-        <video src="<%= artwork.media_url %>" autoplay loop style="width: 100%" />
+        <video src="<%= artwork.media_url %>" autoplay loop style="
+          position: relative;
+          top: -354px;
+          width: 202px;
+          left: 83px;
+          object-fit: cover;
+          height: 162px;
+          margin-bottom: -140px;
+          border: solid 2px black;
+        " />
       <% else %>
         <% raise %>
       <% end %>
