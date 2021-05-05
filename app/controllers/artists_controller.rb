@@ -3,8 +3,10 @@ class ArtistsController < ApplicationController
     @artist = Artist.find_by(screen_name: params[:screen_name])
     if @artist.present?
       CollectArtistWorker.perform_async(params[:screen_name]) # Jobに依頼
+      # TODO: 何分か以内にデータ取得した場合は、動かさない
     else
       CollectArtistWorker.new.perform(params[:screen_name]) # 初回はその場で取得
+      # TODO: 直近200件しか取得しない
       @artist = Artist.find_by!(screen_name: params[:screen_name])
     end
     @artworks = @artist.artworks.order(favorite_count: :desc).limit(20).preload(:hashtags, :artist)

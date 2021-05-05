@@ -7,9 +7,11 @@ class CollectArtistWorker
     # → Hashタグにも対応する
 
     # アーティストの作品を収集
+    # TODO: 一番過去まで取得したら 過去の情報は取得しないようにする
     TwitterUserTweet.new(screen_name).collect_artworks!
 
     # アーティストがいいねした作品を収集
+    # TODO: 過去のいいねしたものをすべて取るようにする
     artist = Artist.find_by(screen_name: screen_name)
     return if artist.blank?
 
