@@ -1,4 +1,23 @@
-<img src="<%= @artist.profile_banner_url %>" style="width: 100%">
+<a href="<%= @artist.url %>" style="text-decoration: none;
+  display: block;
+  text-align: center;
+  margin-bottom: 20px;
+">
+  <img src="<%= @artist.profile_banner_url %>" style="width: 100%" />
+
+  <img src="<%= @artist.profile_image_url %>" style="
+    display: block;
+    height: 64px;
+    margin: 0 auto;
+    position: relative;
+    top: -39px;
+    border-radius: 50%;
+    border: solid 2px white;
+    margin-bottom: -25px;
+  " />
+  <%= @artist.name %>
+</a>
+
 <% @artworks.each do |artwork| %>
   <%= render partial: 'common/artworks', locals: { artwork: artwork } %>
 <% end %>
