@@ -35,6 +35,7 @@
 #  url                          :string           not null
 #  utc_offset                   :string
 #  verified                     :boolean          not null
+#  collect_tweet_oldest_id      :bigint
 #
 # Indexes
 #
