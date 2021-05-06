@@ -8,7 +8,7 @@ class CollectArtistWorker
 
     # アーティストの作品を収集
     # TODO: 一番過去まで取得したら 過去の情報は取得しないようにする
-    TwitterUserTweet.new(screen_name).collect_artworks!
+    CollectArtwork.new(screen_name).exec
 
     # アーティストがいいねした作品を収集
     # TODO: 過去のいいねしたものをすべて取るようにする

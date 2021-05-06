@@ -41,7 +41,9 @@ create_table :artists, id: :bigint, unsigned: true,  force: :cascade do |t|
   t.string :name, null: false
   t.string :screen_name, null: false
 
+  t.bigint :collect_tweet_latest_id
   t.bigint :collect_tweet_oldest_id # TODO: null: false
+  t.bigint :oldest_tweet_collected, default: false, null: false
 
   t.string :location
   t.string :description
