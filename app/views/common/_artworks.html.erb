@@ -1,6 +1,10 @@
 <% artist = artwork.artist %>
-<div style="padding-bottom: 60px">
-  <div style="padding: 4px 10px">
+<div style="margin-bottom: -70px">
+  <div style="
+    padding: 4px 10px;
+    position: relative;
+    top: 62px;
+  ">
     <a href="<%= "/#{artist.screen_name}" %>" style="text-decoration: none">
       <img src="<%= artist.profile_image_url %>" style="border-radius: 50%; height: 32px;">
       <div style="display: inline-block; height:32px; margin: auto; color: #639bff;">
@@ -28,7 +32,7 @@
           border: solid 2px black;
         " />
       <% elsif artwork.media_type == 'animated_gif' || artwork.media_type == 'video' %>
-        <video src="<%= artwork.media_url %>" autoplay loop style="
+        <video src="<%= artwork.media_url %>" autoplay loop muted style="
           position: relative;
           top: -354px;
           width: 202px;
@@ -44,7 +48,12 @@
     </a>
   </div>
 
-  <div style="padding: 4px 10px">
+  <div style="
+    padding: 4px 10px;
+    color: #dccdbb;
+    position: relative;
+    top: -150px;
+  ">
     <%= artwork.text.gsub(/http.+/, '').gsub(/#.+/, '') %>
     <% artwork.hashtags.map(&:name).each do |hashtag| %>
       <a href="<%= "/hashtags/#{hashtag}" %>"><%= "##{hashtag}" %></a>
