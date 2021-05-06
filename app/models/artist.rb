@@ -17,6 +17,7 @@
 #  listed_count                 :integer          not null
 #  location                     :string
 #  name                         :string           not null
+#  oldest_tweet_collected       :integer          default(0), not null
 #  profile_background_color     :string           not null
 #  profile_background_image_url :string
 #  profile_background_tile      :boolean          not null
@@ -35,7 +36,8 @@
 #  url                          :string           not null
 #  utc_offset                   :string
 #  verified                     :boolean          not null
-#  collect_tweet_oldest_id      :bigint
+#  collect_tweet_latest_id      :integer
+#  collect_tweet_oldest_id      :integer
 #
 # Indexes
 #

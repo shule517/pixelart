@@ -18,8 +18,8 @@
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  artist_id               :integer          not null
-#  in_reply_to_status_id   :integer
-#  in_reply_to_user_id     :bigint
+#  in_reply_to_status_id   :bigint
+#  in_reply_to_user_id     :integer
 #
 # Indexes
 #

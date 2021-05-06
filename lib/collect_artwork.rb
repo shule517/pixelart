@@ -15,11 +15,22 @@ class CollectArtwork
     ActiveRecord::Base.transaction do
       tweets = user_tweets(max_id: max_id)
       puts "max_id: #{max_id} -> #{tweets.first&.id} - #{tweets.last&.id}"
-      return if tweets.blank?
+
+      if tweets.blank?
+        # 一番古いツイートまで収集完了！
+        artist = Artist.find_by(screen_name: @screen_name)
+        artist&.update!(oldest_tweet_collected: true)
+        return
+      end
 
       select_artworks(tweets).each do |artwork|
         artwork = Artwork.create_from_tweet!(artwork)
-        artwork.artist.update!(collect_tweet_oldest_id: tweets.last.id)
+        artist = artwork.artist
+        if artist.collect_tweet_latest_id.blank? || artist.collect_tweet_latest_id < tweets.first.id
+          artist.collect_tweet_latest_id = tweets.first.id
+        end
+        artist.collect_tweet_oldest_id = tweets.last.id
+        artist.save!
       end
       # statuses/user_timeline.jsonは、1秒間に1回まで
       sleep(1)
