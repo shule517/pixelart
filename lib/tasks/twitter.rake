@@ -54,19 +54,39 @@ namespace :twitter do
     20.times.each do
       # pixel_halがいいねしたアーティストが好きな作品をRTしていく
       hal = Artist.find_by!(screen_name: :pixel_hal)
-      artist = hal.favorite_artworks.group(:artist_id).select("artworks.artist_id, count(artworks.artist_id) as artist_count").order("artist_count desc").limit(10).map(&:artist).sample
+      artist = hal.favorite_artworks.group(:artist_id).select("artworks.artist_id, count(artworks.artist_id) as artist_count").order("artist_count desc").sample.artist
 
-      if rand(9) <= 1
+      if rand(9) <= 2
         # お気に入りアーティスト の 人気のドット絵をRT
-        artwork = artist.artworks.where(pixel_retweeted: false).order(favorite_count: :desc).first
+        artworks = artist.artworks
       else
         # お気に入りアーティスト の いいねしたドット絵をRT
-        artwork = artist.favorite_artworks.where(pixel_retweeted: false).first
+        artworks = artist.favorite_artworks
       end
+
+      artwork = artworks.where(lang: :ja).where.not(id: hal.favorite_artworks).where(pixel_retweeted: false).order(favorite_count: :desc).first
 
       next if artwork.blank?
       TwitterClient.pixel.client.retweet(artwork.id)
       artwork.update!(pixel_retweeted: true)
     end
+
+    # 20.times.each do
+    #   # pixel_halがいいねしたアーティストが好きな作品をRTしていく
+    #   hal = Artist.find_by!(screen_name: :pixel_hal)
+    #   artist = hal.favorite_artworks.group(:artist_id).select("artworks.artist_id, count(artworks.artist_id) as artist_count").order("artist_count desc").limit(10).map(&:artist).sample
+    #
+    #   if rand(9) <= 1
+    #     # お気に入りアーティスト の 人気のドット絵をRT
+    #     artwork = artist.artworks.where(pixel_retweeted: false).order(favorite_count: :desc).first
+    #   else
+    #     # お気に入りアーティスト の いいねしたドット絵をRT
+    #     artwork = artist.favorite_artworks.where(pixel_retweeted: false).first
+    #   end
+    #
+    #   next if artwork.blank?
+    #   TwitterClient.pixel.client.retweet(artwork.id)
+    #   artwork.update!(pixel_retweeted: true)
+    # end
   end
 end
