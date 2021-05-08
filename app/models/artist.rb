@@ -17,7 +17,7 @@
 #  listed_count                 :integer          not null
 #  location                     :string
 #  name                         :string           not null
-#  oldest_tweet_collected       :integer          default(0), not null
+#  oldest_tweet_collected       :bigint           default(0), not null
 #  profile_background_color     :string           not null
 #  profile_background_image_url :string
 #  profile_background_tile      :boolean          not null
@@ -33,6 +33,7 @@
 #  screen_name                  :string           not null
 #  statuses_count               :integer          not null
 #  time_zone                    :string
+#  tweet_collected_at           :datetime
 #  url                          :string           not null
 #  utc_offset                   :string
 #  verified                     :boolean          not null

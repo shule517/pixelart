@@ -5,10 +5,19 @@ class CollectArtwork
   end
 
   def exec
+    return if collect_limited?
     collect_artworks!
   end
 
   private
+
+  def collect_limited?
+    # 収集は、1時間に1回まで
+    artist = Artist.find_by(screen_name: @screen_name)
+    return false if artist.blank?
+
+    (Time.zone.now - 1.hour) < artist.tweet_collected_at
+  end
 
   def collect_artworks!(max_id: nil)
     tweets = nil
@@ -30,6 +39,7 @@ class CollectArtwork
           artist.collect_tweet_latest_id = tweets.first.id
         end
         artist.collect_tweet_oldest_id = tweets.last.id
+        artist.tweet_collected_at = Time.zone.now
         artist.save!
       end
       # statuses/user_timeline.jsonは、1秒間に1回まで

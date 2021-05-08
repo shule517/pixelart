@@ -47,14 +47,15 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean "default_profile_image", null: false
     t.integer "collect_tweet_oldest_id"
     t.integer "collect_tweet_latest_id"
-    t.integer "oldest_tweet_collected", default: 0, null: false
+    t.bigint "oldest_tweet_collected", default: 0, null: false
+    t.datetime "tweet_collected_at"
     t.index ["lang"], name: "index_artists_on_lang"
     t.index ["screen_name"], name: "index_artists_on_screen_name", unique: true
   end
 
   create_table "artwork_hashtags", force: :cascade do |t|
-    t.bigint "artwork_id", null: false
-    t.integer "hashtag_id", null: false
+    t.integer "artwork_id", null: false
+    t.bigint "hashtag_id", null: false
     t.index ["artwork_id", "hashtag_id"], name: "index_artwork_hashtags_on_artwork_id_and_hashtag_id", unique: true
   end
 
@@ -65,8 +66,8 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "text", null: false
     t.boolean "truncated", null: false
     t.string "source", null: false
-    t.bigint "in_reply_to_status_id"
-    t.integer "in_reply_to_user_id"
+    t.integer "in_reply_to_status_id"
+    t.bigint "in_reply_to_user_id"
     t.string "in_reply_to_screen_name"
     t.integer "retweet_count", null: false
     t.integer "favorite_count", null: false
