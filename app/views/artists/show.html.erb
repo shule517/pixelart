@@ -32,32 +32,34 @@
 
 <% @like_artists.each do |artist, artist_count| %>
   <div>
-    <img src="<%= artist.profile_image_url %>" style="
-      display: block;
-      height: 64px;
-      margin: 0 auto;
-      position: relative;
-      top: 10px;
-      border-radius: 40%;
-      border: solid 2px white;
-      margin-bottom: -25px;
-    ">
-    <%= artist.name %>
-    <span style="margin-left: 5px; color: gray;"><%= artist_count %></span>
-
-    <% artwork = artist.most_popular_artwork %>
-    <% if artwork.media_type == 'photo' %>
-      <img src="<%= artwork.media_url %>" style="
-        width: 100%;
-        height: 300px;
-        object-fit: cover;
+    <a href="<%= artist.url %>">
+      <img src="<%= artist.profile_image_url %>" style="
+        display: block;
+        height: 64px;
+        margin: 0 auto;
+        position: relative;
+        top: 30px;
+        border-radius: 40%;
+        border: solid 3px white;
+        margin-bottom: -25px;
       ">
-    <% elsif artwork.media_type == 'animated_gif' || artwork.media_type == 'video' %>
-      <video src="<%= artwork.media_url %>" autoplay loop muted style="
-        width: 100%;
-        height: 300px;
-        object-fit: cover;
-      " />
-    <% end %>
+      <%= artist.name %>
+      <span style="margin-left: 5px; color: gray;"><%= artist_count %></span>
+
+      <% artwork = artist.most_popular_artwork %>
+      <% if artwork.media_type == 'photo' %>
+        <img src="<%= artwork.media_url %>" style="
+          width: 100%;
+          height: 300px;
+          object-fit: cover;
+        ">
+      <% elsif artwork.media_type == 'animated_gif' || artwork.media_type == 'video' %>
+        <video src="<%= artwork.media_url %>" autoplay loop muted style="
+          width: 100%;
+          height: 300px;
+          object-fit: cover;
+        " />
+      <% end %>
+    </a>
   </div>
 <% end %>
