@@ -48,4 +48,25 @@ namespace :twitter do
     # 0.5 jaの人気な作品
     # 0.5 enの人気な作品
   end
+
+  desc 'おすすめ作品をRTする'
+  task rt_test: :environment do
+    20.times.each do
+      # pixel_halがいいねしたアーティストが好きな作品をRTしていく
+      hal = Artist.find_by!(screen_name: :pixel_hal)
+      artist = hal.favorite_artworks.group(:artist_id).select("artworks.artist_id, count(artworks.artist_id) as artist_count").order("artist_count desc").limit(10).map(&:artist).sample
+
+      if rand(9) <= 7
+        # 人気のドット絵をRT
+        artwork = artist.artworks.where(pixel_retweeted: false).order(favorite_count: :desc).first
+      else
+        # いいねしたドット絵をRT
+        artwork = artist.favorite_artworks.where(pixel_retweeted: false).first
+      end
+
+      return if artwork.blank?
+      TwitterClient.pixel.client.retweet(artwork.id)
+      artwork.update!(pixel_retweeted: true)
+    end
+  end
 end
