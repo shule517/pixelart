@@ -14,9 +14,9 @@ class CollectArtwork
   def collect_limited?
     # 収集は、1時間に1回まで
     artist = Artist.find_by(screen_name: @screen_name)
-    return false if artist.blank?
-
-    (Time.zone.now - 1.hour) < artist.tweet_collected_at
+    if artist&.tweet_collected_at.present?
+      (Time.zone.now - 1.hour) < artist.tweet_collected_at
+    end
   end
 
   def collect_artworks!(max_id: nil)
