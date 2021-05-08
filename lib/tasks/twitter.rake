@@ -64,7 +64,7 @@ namespace :twitter do
         artwork = artist.favorite_artworks.where(pixel_retweeted: false).first
       end
 
-      return if artwork.blank?
+      next if artwork.blank?
       TwitterClient.pixel.client.retweet(artwork.id)
       artwork.update!(pixel_retweeted: true)
     end
