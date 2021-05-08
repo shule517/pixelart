@@ -56,11 +56,11 @@ namespace :twitter do
       hal = Artist.find_by!(screen_name: :pixel_hal)
       artist = hal.favorite_artworks.group(:artist_id).select("artworks.artist_id, count(artworks.artist_id) as artist_count").order("artist_count desc").limit(10).map(&:artist).sample
 
-      if rand(9) <= 7
-        # 人気のドット絵をRT
+      if rand(9) <= 1
+        # お気に入りアーティスト の 人気のドット絵をRT
         artwork = artist.artworks.where(pixel_retweeted: false).order(favorite_count: :desc).first
       else
-        # いいねしたドット絵をRT
+        # お気に入りアーティスト の いいねしたドット絵をRT
         artwork = artist.favorite_artworks.where(pixel_retweeted: false).first
       end
 
