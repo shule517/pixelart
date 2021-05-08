@@ -14,6 +14,8 @@ create_table :artworks, id: :bigint, unsigned: true, force: :cascade do |t|
   t.string :lang, null: false
   t.string :media_url, null: false  # http://pbs.twimg.com/media/E0FEvXdVcAAQsB9.png
   t.string :media_type, null: false # photo / animated_gif / video
+
+  t.boolean :pixel_retweeted, null: false, default: false
   t.timestamps
 
   # 追加しなかった情報

@@ -8,6 +8,7 @@
 #  lang                    :string           not null
 #  media_type              :string           not null
 #  media_url               :string           not null
+#  pixel_retweeted         :boolean          default(FALSE), not null
 #  possibly_sensitive      :boolean          not null
 #  posted_at               :datetime         not null
 #  retweet_count           :integer          not null
@@ -18,8 +19,8 @@
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  artist_id               :integer          not null
-#  in_reply_to_status_id   :integer
-#  in_reply_to_user_id     :bigint
+#  in_reply_to_status_id   :bigint
+#  in_reply_to_user_id     :integer
 #
 # Indexes
 #

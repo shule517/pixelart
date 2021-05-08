@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table "artwork_hashtags", force: :cascade do |t|
-    t.integer "artwork_id", null: false
-    t.bigint "hashtag_id", null: false
+    t.bigint "artwork_id", null: false
+    t.integer "hashtag_id", null: false
     t.index ["artwork_id", "hashtag_id"], name: "index_artwork_hashtags_on_artwork_id_and_hashtag_id", unique: true
   end
 
@@ -66,8 +66,8 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "text", null: false
     t.boolean "truncated", null: false
     t.string "source", null: false
-    t.integer "in_reply_to_status_id"
-    t.bigint "in_reply_to_user_id"
+    t.bigint "in_reply_to_status_id"
+    t.integer "in_reply_to_user_id"
     t.string "in_reply_to_screen_name"
     t.integer "retweet_count", null: false
     t.integer "favorite_count", null: false
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "media_type", null: false
     t.string "url", null: false
     t.integer "artist_id", null: false
+    t.boolean "pixel_retweeted", default: false, null: false
     t.index ["artist_id"], name: "index_artworks_on_artist_id"
     t.index ["lang"], name: "index_artworks_on_lang"
     t.index ["media_type"], name: "index_artworks_on_media_type"
