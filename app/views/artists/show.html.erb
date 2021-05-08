@@ -45,8 +45,10 @@
       ">
       <%= artist.name %>
       <span style="margin-left: 5px; color: gray;"><%= artist_count %></span>
+    </a>
 
-      <% artwork = artist.most_popular_artwork %>
+    <% artwork = artist.most_popular_artwork %>
+    <a href="/<%= artist.screen_name %>">
       <% if artwork.media_type == 'photo' %>
         <img src="<%= artwork.media_url %>" style="
           width: 100%;
