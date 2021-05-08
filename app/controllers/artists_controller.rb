@@ -11,5 +11,6 @@ class ArtistsController < ApplicationController
     end
     @artworks = @artist.artworks.order(favorite_count: :desc).limit(20).preload(:hashtags, :artist)
     @like_artworks = @artist.favorite_artworks.order(favorite_count: :desc).preload(:hashtags, :artist)
+    @like_artists = @artist.favorite_artworks.group(:artist_id).select("artworks.artist_id, count(artworks.artist_id) as artist_count").order("artist_count desc").limit(20).map {|a| [a.artist, a.artist_count]}
   end
 end
