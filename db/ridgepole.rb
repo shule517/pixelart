@@ -27,6 +27,7 @@ end
 add_index :artworks, :lang
 add_index :artworks, :media_type
 add_index :artworks, :artist_id
+add_index :artworks, :posted_at
 
 create_table :artwork_hashtags, id: :bigint, unsigned: true, force: :cascade do |t|
   t.bigint :artwork_id, null: false
