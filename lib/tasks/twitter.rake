@@ -56,15 +56,40 @@ namespace :twitter do
       hal = Artist.find_by!(screen_name: :pixel_hal)
       artist = hal.favorite_artworks.group(:artist_id).select("artworks.artist_id, count(artworks.artist_id) as artist_count").order("artist_count desc").sample.artist
 
-      if rand(9) <= 2
-        # お気に入りアーティスト の 人気のドット絵をRT
-        artworks = artist.artworks
+      value = rand
+      if value <= 0.1
+        # 10%(安定&挑戦): 直近3日間のTOP絵
+        artworks = Artwork.where('? < posted_at', (Time.zone.now - 3.days)).where(lang: :ja)
+
+        # if rand(1) == 0
+        #   # 今日のTOP絵
+        #   artworks = Artwork.where('? < posted_at', (Time.zone.now - 1.day)).where(lang: :ja)
+        # else
+        #   # 今週のTOP絵
+        #   artworks = Artwork.where('? < posted_at', (Time.zone.today - 1.week)).where(lang: :ja)
+        # end
+        # TODO: indie_animeの人気ドット絵
+      elsif value <= 0.2
+        # 10%(挑戦): 意外なおすすめをRT
+        # 海外の人気ドット絵
+        artworks = Artwork.where(lang: :en)
+
+        # if rand(1) == 0
+        #   # 海外の人気ドット絵
+        #   artworks = Artwork.where(lang: :en)
+        # else
+        #   # 日本の人気ドット絵
+        #   artworks = Artwork.where(lang: :ja)
+        # end
+      elsif value <= 0.4
+        # 20%(安定): お気に入りアーティスト の 人気のドット絵をRT
+        artworks = artist.artworks.where(lang: :ja)
       else
-        # お気に入りアーティスト の いいねしたドット絵をRT
-        artworks = artist.favorite_artworks
+        # 60%(まあ安定): お気に入りアーティスト の いいねしたドット絵をRT
+        artworks = artist.favorite_artworks.where(lang: :ja)
       end
 
-      artwork = artworks.where(lang: :ja).where.not(id: hal.favorite_artworks).where(pixel_retweeted: false).order(favorite_count: :desc).first
+      artwork = artworks.where.not(id: hal.favorite_artworks).where(pixel_retweeted: false).order(favorite_count: :desc).first
 
       next if artwork.blank?
       TwitterClient.pixel.client.retweet(artwork.id)
