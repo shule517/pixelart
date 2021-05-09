@@ -58,7 +58,7 @@ namespace :twitter do
 
       value = rand
       if value <= 0.1
-        # 10%: 直近3日間のTOP絵
+        # 10%(安定&挑戦): 直近3日間のTOP絵
         artworks = Artwork.where('? < posted_at', (Time.zone.now - 3.days)).where(lang: :ja)
 
         # if rand(1) == 0
@@ -70,7 +70,7 @@ namespace :twitter do
         # end
         # TODO: indie_animeの人気ドット絵
       elsif value <= 0.2
-        # 10%: 意外なおすすめをRT
+        # 10%(挑戦): 意外なおすすめをRT
         # 海外の人気ドット絵
         artworks = Artwork.where(lang: :en)
 
@@ -82,10 +82,10 @@ namespace :twitter do
         #   artworks = Artwork.where(lang: :ja)
         # end
       elsif value <= 0.4
-        # 20%: お気に入りアーティスト の 人気のドット絵をRT
+        # 20%(安定): お気に入りアーティスト の 人気のドット絵をRT
         artworks = artist.artworks.where(lang: :ja)
       else
-        # 60%: お気に入りアーティスト の いいねしたドット絵をRT
+        # 60%(まあ安定): お気に入りアーティスト の いいねしたドット絵をRT
         artworks = artist.favorite_artworks.where(lang: :ja)
       end
 
