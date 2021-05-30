@@ -25,6 +25,11 @@ namespace :twitter do
     end
   end
 
+  desc 'はるのTwitter情報を取得'
+  task search_artworks_from_hal: :environment do
+    CollectArtistWorker.perform_async('pixel_hal')
+  end
+
   desc 'おすすめ作品をRTする'
   task rt: :environment do
 
