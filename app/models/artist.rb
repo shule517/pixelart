@@ -55,6 +55,10 @@ class Artist < ApplicationRecord
     artworks.order(favorite_count: :desc).first
   end
 
+  def most_popular_photo_artwork
+    artworks.photo.order(favorite_count: :desc).first
+  end
+
   def self.create_from_user!(twitter_user)
     artist = find_or_initialize_by(id: twitter_user.id)
 

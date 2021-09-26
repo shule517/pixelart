@@ -7,4 +7,12 @@ Rails.application.routes.draw do
   resources :hashtags, only: %i(index show)
   mount Sidekiq::Web => '/sidekiq'
   get ':screen_name', to: 'artists#show', as: :artist
+
+  namespace :api do
+    namespace :v1 do
+      resources :artists, only: %i(show) do
+        resources :artworks, only: %i(index)
+      end
+    end
+  end
 end

@@ -33,6 +33,8 @@ class Artwork < ApplicationRecord
   has_many :artwork_hashtags
   has_many :hashtags, through: :artwork_hashtags
 
+  scope :photo, -> { where(media_type: :photo) }
+
   def self.create_from_tweet!(tweet)
     artwork = find_or_initialize_by(id: tweet.id)
 
