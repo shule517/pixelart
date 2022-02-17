@@ -1,8 +1,8 @@
 class Api::V1::ArtworksController < ApplicationController
   def index
     @artist = Artist.find_by(screen_name: params['artist_id'])
-    @artworks = @artist.artworks.photo.order(favorite_count: :desc).limit(3)
-    @like_artworks = @artist.favorite_artworks.photo.order(favorite_count: :desc).limit(3)
+    @artworks = @artist.artworks.photo.order(favorite_count: :desc).limit(15)
+    @like_artworks = @artist.favorite_artworks.photo.order(favorite_count: :desc).limit(15)
     @like_artists = @artist.favorite_artworks.group(:artist_id).select("artworks.artist_id, count(artworks.artist_id) as artist_count").order("artist_count desc").limit(3).map(&:artist)
 
     render json: {
