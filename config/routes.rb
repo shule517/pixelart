@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      resources :artworks, only: %i(index)
       resources :artists, only: %i(show) do
         resources :artworks, only: %i(index)
       end
