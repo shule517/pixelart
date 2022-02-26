@@ -13,8 +13,18 @@ class Api::V1::ArtworksController < ApplicationController
 
   def artist_artworks_index
     @artist = Artist.find_by(screen_name: params['artist_id'])
-    @artworks = @artist.artworks.photo.order(favorite_count: :desc).limit(15)
-    @like_artworks = @artist.favorite_artworks.photo.order(favorite_count: :desc).limit(15)
+
+    @artworks = @artist.artworks.photo.limit(15)
+    @like_artworks = @artist.favorite_artworks.photo.limit(15)
+
+    if param_order == :favorite_count
+      @artworks = @artworks.order(favorite_count: :desc)
+      @like_artworks = @like_artworks.order(favorite_count: :desc)
+    elsif param_order == :posted_at
+      @artworks = @artworks.order(posted_at: :desc)
+      @like_artworks = @like_artworks.order(posted_at: :desc)
+    end
+
     @like_artists = @artist.favorite_artworks.group(:artist_id).select("artworks.artist_id, count(artworks.artist_id) as artist_count").order("artist_count desc").limit(3).map(&:artist)
 
     render json: {
@@ -31,5 +41,9 @@ class Api::V1::ArtworksController < ApplicationController
     render json: {
       artworks: @artworks.map { |artwork| { artwork: artwork, artist: artwork.artist } },
     }
+  end
+
+  def param_order
+    (params['order'].presence || :posted_at).to_sym
   end
 end
